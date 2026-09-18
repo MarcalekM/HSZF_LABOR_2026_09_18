@@ -29,6 +29,7 @@ namespace HSZF_LABOR_2026_09_18
             if (File.Exists(filePath))
             {
                 movies = JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText(filePath), options);
+                Event?.Invoke(this, "Load OK");
             }
 
             if (movies == null)
@@ -51,7 +52,7 @@ namespace HSZF_LABOR_2026_09_18
         public void SaveMovies()
         {
             File.WriteAllText(filePath, JsonSerializer.Serialize(movies, options));
-            Event?.Invoke(this, "Load OK");
+            Event?.Invoke(this, "Save OK");
         }
 
         public void ListMovies()
